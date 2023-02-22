@@ -1,26 +1,16 @@
 ---
 weight: 70
 ---
-{{% section %}}
 
-## Conclusion
----
-### Summary of the Key Points
-- Recap of the main points made in the presentation
----
-### Future Developments
-- Discussion of potential future developments for the tool
----
-### Final Thoughts
-- Closing thoughts and recommendations
----
-## References
-
+{{<  div "fragment" >}}
 ### Official Documentation
-- Link to official documentation
-
+https://diagrams.mingrammer.com/
+{{< /div >}}
+{{< div "fragment" >}}
 ### Tutorials and Online Resources
-- Links to helpful tutorials and online resources
----
-{{% slide content="reusables.thanks" %}}
-{{% /section %}}
+https://diagrams.mingrammer.com/docs/getting-started/examples
+{{< /div >}}
+
+------
+## Thank you for your attention!
+### Any questions?

@@ -1,23 +1,22 @@
 ---
-weight: 50
+weight: 40
 ---
-{{% section %}}
 
 ## Advantages of Using the Diagrams Python Tool
----
-### Time-Saving
-- How the tool can save time
-- Examples of how it can be used to create diagrams quickly
----
-### Cost-Effective
-- How the tool can save money
-- Examples of how it can be used to create diagrams without expensive software
----
-### High-Quality Outputs
-- How the tool can create high-quality diagrams
-- Examples of high-quality diagrams created using the tool
----
-### User-Friendly Interface
-- How the tool has a user-friendly interface
-- Examples of how easy it is to use the tool
-{{% /section %}}
+
+------
+### Define as code, not as a drawing
+As engineers, we are prone to not be very savvy about design tools and having to learn one
+just to create a simple infrastructure diagram for documentation can be taxing and
+time consuming.
+
+------
+### Code can be commited
+Most likely you're already using some sort of version control system (git, svn, mercurial, etc)
+and you would like to keep using it for eveything else, commiting diagrams in this way is
+as simple as adding new python files to your project.
+
+------
+### Can consume data to create diagrams
+You can easily plug this into any other python scripts you may have to easily and
+automatically create architecture diagrams that change with the actual architecture.

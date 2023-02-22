@@ -1,9 +1,9 @@
 ---
 weight: 60
 ---
+{{% section %}}
 ### Basic example
-
-{{< code lang="python" line-numbers="true" focus="|1-4|6-11" >}}
+```python
 from diagrams import Diagram
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
@@ -16,19 +16,12 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
                   EC2("worker4"),
                   EC2("worker5")] >> RDS("events")
 
-{{< /code >}}
-{{< lines "bg-darkgray text-white" >}}
-First we import the necessary libraries
-and then we define the actual diagram using the `with` control statement
-{{< /lines >}}
-
-------
-{{< img src="/images/01-basic.png" >}}
-
-------
+```
+---
+> Image here
+---
 ### A more advanced example
-
-{{< code lang="python" line-numbers="true" focus="1-9|11-21|23-26|28-31|33-36" >}}
+```python
 from diagrams import Cluster, Diagram
 from diagrams.onprem.analytics import Spark
 from diagrams.onprem.compute import Server
@@ -65,15 +58,11 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
     aggregator >> Kafka("stream") >> Spark("analytics")
 
     ingress >> grpcsvc >> aggregator
-{{< /code >}}
+```
 
-------
-{{< img src="/images/02-advanced.png" >}}
-
-------
+---
 ### Working with GCP
-
-{{< code lang="python" line-numbers="true" focus="1-6|8|9-14|16-18|20-22|24-31" >}}
+```python
 from diagrams import Cluster, Diagram
 from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
 from diagrams.gcp.compute import AppEngine, Functions
@@ -105,14 +94,10 @@ with Diagram("Message Collecting", show=False):
                 flow >> Functions("func") >> AppEngine("appengine")
 
     pubsub >> flow
-{{< /code >}}
-
-------
-{{< img src="/images/03-gcp_example.png" height="960" >}}
-
-------
+```
+---
 ### Kubernetes example
-{{< code lang="python" line-numbers="true" focus="1-4|6-10" >}}
+```python
 from diagrams import Diagram
 from diagrams.k8s.clusterconfig import HPA
 from diagrams.k8s.compute import Deployment, Pod, ReplicaSet
@@ -124,7 +109,5 @@ with Diagram("Exposed Pod with 3 Replicas", show=False):
             Pod("pod2"),
             Pod("pod3")] << ReplicaSet("rs") << Deployment("dp") << HPA("hpa")
 
-{{< /code >}}
-
-------
-{{< img src="/images/04-kubernetes.png" >}}
+```
+{{% /section %}}

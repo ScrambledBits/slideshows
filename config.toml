@@ -1,4 +1,4 @@
-baseURL = 'https://slides.scrambledbits.com/'
+baseURL = 'https://scrambledbits.github.io/slideshows/'
 languageCode = 'en-us'
 title = 'ScrambledBits | Presentations'
 

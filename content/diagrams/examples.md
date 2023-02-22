@@ -24,7 +24,7 @@ and then we define the actual diagram using the `with` control statement
 {{< /lines >}}
 
 ---
-{{< img src="/images/01-basic.png" >}}
+{{< img src="images/01-basic.png" >}}
 
 ---
 ### A more advanced example
@@ -69,7 +69,7 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
 {{< /code >}}
 
 ---
-{{< img src="/images/02-advanced.png" >}}
+{{< img src="images/02-advanced.png" >}}
 
 ---
 ### Working with GCP
@@ -109,7 +109,7 @@ with Diagram("Message Collecting", show=False):
 {{< /code >}}
 
 ---
-{{< img src="/images/03-gcp_example.png" height="960" >}}
+{{< img src="images/03-gcp_example.png" height="960" >}}
 
 ---
 ### Kubernetes example
@@ -128,6 +128,6 @@ with Diagram("Exposed Pod with 3 Replicas", show=False):
 {{< /code >}}
 
 ---
-{{< img src="/images/04-kubernetes.png" >}}
+{{< img src="images/04-kubernetes.png" >}}
 
 {{% /section %}}

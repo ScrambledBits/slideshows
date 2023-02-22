@@ -1,0 +1,30 @@
+baseURL = 'https://slides.scrambledbits.com/'
+languageCode = 'en-us'
+title = 'ScrambledBits | Presentations'
+
+theme = ["github.com/dzello/reveal-hugo"]
+
+[markup.highlight]
+codeFences = true
+anchorLineNos = true
+style = "rrt"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
+
+[params.reveal_hugo]
+theme = "blood"
+controls_tutorial = true
+slide_number = true
+show_slide_number = "print"
+hash = true
+jump_to_slide = true
+keyboard = true
+help = true
+transition = "convex"
+margin = 0.04

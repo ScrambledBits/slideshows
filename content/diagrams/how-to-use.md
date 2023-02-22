@@ -1,7 +1,7 @@
 ---
 weight: 50
 ---
-
+{{% section %}}
 ## How to Use the Diagrams Python Tool
 
 ------
@@ -33,10 +33,11 @@ with Diagram("Web Service", show=False):
     ELB("lb") >> EC2("web") >> RDS("userdb")
 {{< /code >}}
 {{< /div >}}
-{{<  div "fragment" >}}
+
+------
+
 Run the script
 {{< code lang="shell" line-numbers="true" >}}
 python diagrams.py
 {{< /code >}}
-{{< /div >}}
-
+{{% /section %}}

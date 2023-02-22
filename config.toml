@@ -5,8 +5,8 @@ title = 'ScrambledBits | Presentations'
 theme = ["github.com/dzello/reveal-hugo"]
 
 [markup.highlight]
-codeFences = true
-anchorLineNos = true
+codeFences = false
+anchorLineNos = false
 style = "rrt"
 
 [markup.goldmark.renderer]
@@ -28,3 +28,8 @@ keyboard = true
 help = true
 transition = "convex"
 margin = 0.04
+highlight_theme = "monokai-sublime"
+
+[reveal_hugo.plugins]
+name = "typed.js"
+source = "/libs/typed.js/typed.js"

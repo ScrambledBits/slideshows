@@ -1,6 +1,7 @@
 ---
 weight: 60
 ---
+{{% section %}}
 ### Basic example
 
 {{< code lang="python" line-numbers="true" focus="|1-4|6-11" >}}
@@ -22,10 +23,10 @@ First we import the necessary libraries
 and then we define the actual diagram using the `with` control statement
 {{< /lines >}}
 
-------
+---
 {{< img src="/images/01-basic.png" >}}
 
-------
+---
 ### A more advanced example
 
 {{< code lang="python" line-numbers="true" focus="1-9|11-21|23-26|28-31|33-36" >}}
@@ -67,10 +68,10 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
     ingress >> grpcsvc >> aggregator
 {{< /code >}}
 
-------
+---
 {{< img src="/images/02-advanced.png" >}}
 
-------
+---
 ### Working with GCP
 
 {{< code lang="python" line-numbers="true" focus="1-6|8|9-14|16-18|20-22|24-31" >}}
@@ -107,10 +108,10 @@ with Diagram("Message Collecting", show=False):
     pubsub >> flow
 {{< /code >}}
 
-------
+---
 {{< img src="/images/03-gcp_example.png" height="960" >}}
 
-------
+---
 ### Kubernetes example
 {{< code lang="python" line-numbers="true" focus="1-4|6-10" >}}
 from diagrams import Diagram
@@ -126,5 +127,7 @@ with Diagram("Exposed Pod with 3 Replicas", show=False):
 
 {{< /code >}}
 
-------
+---
 {{< img src="/images/04-kubernetes.png" >}}
+
+{{% /section %}}

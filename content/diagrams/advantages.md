@@ -1,7 +1,7 @@
 ---
 weight: 40
 ---
-
+{{% section %}}
 ## Advantages of Using the Diagrams Python Tool
 
 ------
@@ -20,3 +20,4 @@ as simple as adding new python files to your project.
 ### Can consume data to create diagrams
 You can easily plug this into any other python scripts you may have to easily and
 automatically create architecture diagrams that change with the actual architecture.
+{{% /section %}}

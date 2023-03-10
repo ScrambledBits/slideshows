@@ -9,4 +9,5 @@ outputs: ["Reveal"]
 
 
 [Diagrams as code](diagrams/)
+[Taskfile](taskfile/)
 ---

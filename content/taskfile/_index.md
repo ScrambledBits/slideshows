@@ -1,6 +1,6 @@
 ---
 weight: 10
-title: "Diagrams as code"
+title: "Taskfile, or how to automate stuff"
 date: 2023-02-14T15:24:14-06:00
 draft: false
 outputs: ["Reveal"]

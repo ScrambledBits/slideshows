@@ -40,3 +40,5 @@ npm install -g @go-task/cli
 - name: arduino/setup-task
   uses: arduino/setup-task@v1.0.3
 {{< /code >}}
+
+{{% /section %}}

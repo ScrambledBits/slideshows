@@ -1,5 +1,5 @@
 ---
-title: "Diagrams as code"
+title: "Slideshows"
 date: 2023-02-14T15:24:14-06:00
 outputs: ["Reveal"]
 ---
@@ -7,7 +7,7 @@ outputs: ["Reveal"]
 
 ### Available Slideshows:
 
-
-[Diagrams as code](diagrams/)
-[Taskfile](taskfile/)
+- [Diagrams as code](diagrams/)
+- [Taskfile](taskfile/)
+- [TFEnv vs TFSwitch](tfenv-vs-tfswitch/)
 ---

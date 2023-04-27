@@ -30,6 +30,6 @@ transition = "convex"
 margin = 0.04
 highlight_theme = "monokai-sublime"
 
-[reveal_hugo.plugins]
-name = "typed.js"
-source = "/libs/typed.js/typed.js"
+# [[params.reveal_hugo.plugins]]
+# name = "typed.js"
+# source = "libs/typed.js/typed.js"

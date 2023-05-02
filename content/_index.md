@@ -10,4 +10,4 @@ outputs: ["Reveal"]
 - [Diagrams as code](diagrams/)
 - [Taskfile](taskfile/)
 - [TFEnv vs TFSwitch](tfenv-vs-tfswitch/)
----
+- [AWS Fargate](fargate/)

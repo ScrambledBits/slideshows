@@ -11,3 +11,4 @@ outputs: ["Reveal"]
 - [Taskfile](taskfile/)
 - [TFEnv vs TFSwitch](tfenv-vs-tfswitch/)
 - [AWS Fargate](fargate/)
+- [Regula](regula/)

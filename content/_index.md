@@ -12,3 +12,4 @@ outputs: ["Reveal"]
 - [TFEnv vs TFSwitch](tfenv-vs-tfswitch/)
 - [AWS Fargate](fargate/)
 - [Regula](regula/)
+- [OrbStack](orbstack/)

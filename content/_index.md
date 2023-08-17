@@ -13,3 +13,4 @@ outputs: ["Reveal"]
 - [AWS Fargate](fargate/)
 - [Regula](regula/)
 - [OrbStack](orbstack/)
+- [Envoy Proxy](envoy/)

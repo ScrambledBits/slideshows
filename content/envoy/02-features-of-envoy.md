@@ -14,5 +14,5 @@ layout: "list"
 - Observability
 
 {{% note %}}
-Envoy Proxy comes with a host of features that make it a powerful tool for managing network traffic in a microservices architecture. These include out of process architecture, support for HTTP/2 and gRPC, advanced load balancing capabilities, robust APIs for configuration management, and deep observability of L7 traffic.
+Envoy's feature set is a testament to its adaptability in diverse environments. From supporting cutting-edge protocols like HTTP/2 and gRPC to providing advanced load balancing, Envoy is a swiss army knife for network traffic management. Its out-of-process architecture ensures scalability and reliability.
 {{% /note %}}

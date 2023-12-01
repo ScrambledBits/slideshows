@@ -4,8 +4,9 @@ weight: 40
 outputs: ["Reveal"]
 layout: "list"
 ---
-{{% section %}}
+
 ### Running Envoy Proxy in Docker
+
 {{< code lang="bash" focus="|1-2|4-8|10-11|13-14" >}}
 
 ## Pull the official Envoy Docker image:
@@ -25,7 +26,5 @@ docker run -d --name envoy -p 9901:9901 -p 10000:10000 envoy:v1
 {{< /code >}}
 
 {{% note %}}
-Here are the steps to install Envoy Proxy using Docker. Docker allows us to easily manage and isolate our applications within containers. This makes it a popular choice for deploying applications, including Envoy Proxy.
+This segment demonstrates the simplicity of deploying Envoy with Docker, a common scenario in DevOps workflows. We'll walk through the process of pulling the Envoy image, customizing the configuration, and deploying it in a containerized environment, highlighting best practices along the way.
 {{% /note %}}
-
-{{% /section %}}

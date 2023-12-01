@@ -5,8 +5,8 @@ outputs: ["Reveal"]
 layout: "list"
 ---
 
-# Envoy Proxy
+# Welcome to Envoy Proxy
 
 {{% note %}}
-Welcome everyone, today we're going to explore Envoy Proxy, an open-source edge and service proxy designed for cloud-native applications.
+Welcome everyone! Today, we're diving into the world of Envoy Proxy, a cornerstone in modern cloud-native applications. We'll explore its capabilities, use cases, and how it's revolutionizing the way we handle microservices communication.
 {{% /note %}}

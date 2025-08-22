@@ -7,13 +7,29 @@ outputs: ["Reveal"]
 layout: "list"
 ---
 
-## Use Cases
+## Primary Use Cases
 
-OrbStack is super versatile. You can use it to deploy applications, manage services, and even automate tasks. It's like having a superpower for managing your apps!
+### Docker Development Workflow
+- **Local development** with Docker Compose
+- **Multi-architecture builds** (x86/ARM)
+- **Volume mounting** with near-native file performance
+- **CI/CD testing** locally before deployment
+
+### Linux Development Environments
+- **Full Ubuntu/Debian machines** for cross-platform development
+- **Package testing** across different Linux distributions
+- **Legacy system compatibility** with 32-bit support
+- **Network isolation** and custom configurations
+
+### Migration Scenarios
+- **Docker Desktop replacement** (automatic container migration)
+- **Colima users** seeking better performance
+- **VMware Fusion alternatives** for Linux VMs
+- **Performance-critical workloads** requiring fast I/O
 
 {{< video src="https://cdn-web.orbstack.dev/demo/videos/docker.mp4" height="300" >}}
 {{< video src="https://cdn-web.orbstack.dev/demo/videos/machine.mp4" height="300" >}}
 
 {{% note %}}
-Now, who should be using OrbStack? Well, if you're a DevOps engineer who needs to manage Docker containers and Linux machines on macOS, this is the tool for you. And if you're a developer looking for a fast, lightweight, and simple tool for running your applications, you're going to love OrbStack.
+OrbStack excels in specific scenarios where performance matters. For Docker development, it provides seamless compatibility with Docker Compose and multi-architecture builds while delivering significantly faster file I/O for volume mounts. Linux machines are perfect for cross-platform development, testing across distributions, and running legacy 32-bit applications. Many teams migrate from Docker Desktop for licensing reasons or performance gains, while others switch from Colima or VMware Fusion for OrbStack's superior macOS integration and speed.
 {{% /note %}}

@@ -2,12 +2,19 @@
 weight: 20
 ---
 
-## What is Regula?
+## The Evolution of IaC Security
 
-- Regula: A tool for managing Infrastructure as Code (IaC) security and compliance
-- Origin: Fugue project
-- Works with: Terraform, CloudFormation, Kubernetes, and more
+### Historical Context: Regula (2020-2024)
+- **Regula**: Early IaC security tool by Fugue
+- **Status**: Archived September 2024 
+- **Legacy**: Supported Terraform, CloudFormation, Kubernetes
+
+### Modern IaC Security Landscape (2025)
+- **Snyk IaC**: Enterprise-grade successor platform
+- **Checkov**: Policy-as-code framework by Prisma Cloud
+- **Trivy**: Multi-purpose security scanner
+- **KICS**: Query-based static analysis
 
 {{% note %}}
-Regula, a product of the Fugue project, is a tool designed to make life easier for those dealing with Infrastructure as Code. It's all about security and compliance, ensuring your IaC meets the necessary standards. Whether you're using Terraform, CloudFormation, Kubernetes, or other IaC tools, Regula has got your back!
+The IaC security landscape has evolved significantly. Regula, one of the early pioneers from Fugue, was archived in September 2024 as the company pivoted to Snyk. Today's tools offer more comprehensive coverage, better integration, and advanced policy frameworks. We'll explore how modern tools like Snyk IaC, Checkov, and Trivy have superseded earlier solutions with enhanced capabilities and enterprise features.
 {{% /note %}}

@@ -1,5 +1,5 @@
 ---
-title: "OrbStack: Unleashing the Power of DevOps"
+title: "OrbStack: The Fast Docker Desktop Alternative for macOS"
 draft: false
 weight: 10
 outputs: ["Reveal"]
@@ -8,8 +8,8 @@ layout: "list"
 
 # OrbStack
 
-#### Unleashing the Power of DevOps
+#### The Fast Docker Desktop Alternative for macOS
 
 {{% note %}}
-Hey everyone, welcome this presentation, my name is Emilio Castro and today we're going to be diving into an awesome tool called OrbStack. It's all about running Docker containers and Linux machines on macOS. So, let's get started!
+Welcome everyone! Today we're diving into OrbStack, a revolutionary Docker Desktop alternative built specifically for macOS. OrbStack offers lightning-fast performance, native macOS integration, and seamless migration from Docker Desktop. Whether you're running Docker containers or Linux machines, OrbStack delivers 2-5× faster performance with minimal resource usage. Let's explore why OrbStack is becoming the go-to choice for macOS developers in 2025!
 {{% /note %}}

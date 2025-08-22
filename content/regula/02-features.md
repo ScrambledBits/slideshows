@@ -2,13 +2,26 @@
 weight: 30
 ---
 
-## Features of Regula
+## Modern IaC Security Tool Features
 
-- Supports multiple IaC tools
-- Wide policy library
-- Pre-commit checks
-- Integration with CI/CD pipelines
+### Snyk IaC (Enterprise Solution)
+- **Coverage**: 2,000+ security rules across AWS, Azure, GCP, Kubernetes
+- **Integration**: Native IDE plugins, CLI, CI/CD pipelines
+- **Reporting**: Executive dashboards, compliance mapping
+- **Support**: 24/7 enterprise support, SLA guarantees
+
+### Checkov (Open Source Leader)
+- **Policy Framework**: Python-based custom policies
+- **Coverage**: 1,000+ built-in policies
+- **Formats**: Terraform, CloudFormation, Kubernetes, Docker, ARM
+- **IDE Integration**: VS Code, JetBrains, pre-commit hooks
+
+### Trivy (Multi-Purpose Scanner)
+- **Scope**: IaC + container + filesystem + git repository scanning
+- **Speed**: Fastest scanning performance
+- **Output**: SARIF, JSON, table formats
+- **Compliance**: CIS, SOC2, PCI-DSS frameworks
 
 {{% note %}}
-One of the core strengths of Regula is its versatility—it supports multiple IaC tools. But that's not all. It also boasts a wide policy library that you can utilize straight out of the box. Want to catch issues early? Regula's pre-commit checks have you covered. Plus, it easily integrates with your CI/CD pipelines, making it an indispensable part of your development cycle.
+Modern IaC security tools have advanced far beyond early solutions. Snyk IaC offers enterprise-grade features with thousands of security rules and comprehensive compliance reporting. Checkov dominates the open-source space with its flexible Python policy framework. Trivy provides the fastest scanning with multi-purpose security analysis. Each tool addresses different needs - from enterprise compliance to developer productivity.
 {{% /note %}}

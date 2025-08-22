@@ -37,8 +37,11 @@ npm install -g @go-task/cli
 
 ### Github actions
 {{< code lang="yaml" line-numbers="true" >}}
-- name: arduino/setup-task
-  uses: arduino/setup-task@v1.0.3
+- name: Install Task
+  uses: arduino/setup-task@v2
+  with:
+    version: 3.x
+    repo-token: ${{ secrets.GITHUB_TOKEN }}
 {{< /code >}}
 
 {{% /section %}}

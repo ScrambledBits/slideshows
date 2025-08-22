@@ -33,18 +33,18 @@ tfenv list-remote
 ```
 - Install a specific version
 ```shell
-tfenv install 0.12.31
+tfenv install 1.13.0
 ```
 - Switch to a specific version
 ```shell
-tfenv use 0.12.31
+tfenv use 1.13.0
 ```
 
 ------
 
 - Uninstall a specific version
 ```shell
-tfenv uninstall 0.12.31
+tfenv uninstall 1.12.32
 ```
 - Install the latest version
 ```shell

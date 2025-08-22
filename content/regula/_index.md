@@ -1,16 +1,16 @@
 ---
-title: "Regula: Security analysis for IaC"
-date: 2023-05-11T12:45:12-06:00
+title: "IaC Security Tools Evolution"
+date: 2025-08-21T12:45:12-06:00
 draft: false
 weight: 10
 outputs: ["Reveal"]
 layout: "list"
 ---
 
-# Regula
+# IaC Security Tools Evolution
 {{< lines >}}
-### Embrace Compliance with Ease
+### From Legacy Tools to Modern Solutions
 {{< /lines >}}
 {{% note %}}
-Welcome everyone! Today, we're diving into the world of Infrastructure as Code (IaC) with a fantastic tool - Regula. I'm excited to unveil its potential, walk you through its features, advantages, and practical examples. So, are you ready to make cloud governance feel like a breeze? Let's go!
+Welcome everyone! Today, we're exploring the evolution of Infrastructure as Code (IaC) security tools. We'll journey from legacy solutions like Regula to current leading tools like Snyk IaC, Checkov, and Trivy. This presentation will help you understand the modern IaC security landscape and choose the right tools for 2025. Let's dive into securing infrastructure at scale!
 {{% /note %}}

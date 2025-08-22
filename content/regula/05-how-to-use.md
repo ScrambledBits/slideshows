@@ -2,13 +2,35 @@
 weight: 50
 ---
 
-## How to Use Regula
+## Usage Workflows 2025
 
-1. Write your IaC configurations
-2. Install Regula on your local machine or CI/CD pipeline
-3. Run Regula against your configurations
-4. Review and act on the results
+### Development Workflow
+1. **Write IaC configurations** (Terraform, CloudFormation, etc.)
+2. **Pre-commit hooks** for early detection
+3. **IDE integration** for real-time feedback
+4. **Local scanning** before commits
+
+### CI/CD Pipeline Integration
+```yaml
+# GitHub Actions example
+- name: Run Checkov
+  uses: bridgecrewio/checkov-action@master
+  with:
+    directory: .
+    framework: terraform
+
+- name: Run Trivy
+  uses: aquasecurity/trivy-action@master
+  with:
+    scan-type: 'config'
+    scan-ref: '.'
+```
+
+### Enterprise Governance
+- **Policy management** through centralized dashboards
+- **Compliance reporting** for auditors
+- **Exception handling** for approved risks
 
 {{% note %}}
-Using Regula is pretty straightforward. You start by writing your IaC configurations. Then, you'll need to install Regula either on your local machine or directly in your CI/CD pipeline. Once installed, you run Regula against your configurations. The tool will then generate a report detailing any non-compliance issues. All you need to do is review and act on these results to keep your infrastructure compliant and secure.
+Modern IaC security follows a shift-left approach. Developers get immediate feedback through IDE integration and pre-commit hooks. CI/CD pipelines automatically scan every commit with tools like Checkov and Trivy. Enterprise teams manage policies centrally through dashboards, generate compliance reports, and handle risk exceptions through proper governance workflows. This multilayer approach catches issues early while maintaining organizational oversight.
 {{% /note %}}

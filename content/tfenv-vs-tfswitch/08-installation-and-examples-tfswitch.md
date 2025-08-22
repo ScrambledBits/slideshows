@@ -20,7 +20,7 @@ Download the binary from the [releases page](https://github.com/warrensbox/terra
 
 ------
 
-### Using TFEnv
+### Using TFSwitch
 
 - Run the interactive CLI:
 ```bash
@@ -28,7 +28,7 @@ tfswitch
 ```
 - Select a version:
 ```bash
-tfswitch 0.12.31
+tfswitch 1.13.0
 ```
 - List all installed versions:
 ```bash
@@ -43,17 +43,17 @@ tfswitch -l --all
 
 - Set a default version:
 ```bash
-tfswitch -b 0.12.31
+tfswitch -b 1.13.0
 ```
 - Set a default version for a specific directory:
 ```bash
-tfswitch -b 0.12.31 /path/to/directory
+tfswitch -b 1.13.0 /path/to/directory
 ```
 - Set a default version using a configuration file:
 ```bash
-tfswitch -b 0.12.31 --rcfile .tfswitchrc
+tfswitch -b 1.13.0 --rcfile .tfswitchrc
 # or
-echo "0.12.31" > .tfswitchrc
+echo "1.13.0" > .tfswitchrc
 tfswitch --rc
 ```
 {{% /section %}}

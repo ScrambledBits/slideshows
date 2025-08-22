@@ -33,7 +33,7 @@ tasks:
 ------
 ### Running from subdirectories
 
-{{< code lang="python" line-numbers="true" >}}
+{{< code lang="yaml" line-numbers="true" >}}
 version: '3'
 
 tasks:
@@ -68,18 +68,18 @@ tasks:
     cmds:
       - npm install
       - npm run build
-    precondition:
+    preconditions:
       - sh: command -v npm
-      - msg: "npm not found, please install it"
+        msg: "npm not found, please install it"
 
   test:
     desc: Run tests
     cmds:
       - task build
       - npm test
-    precondition:
+    preconditions:
       - sh: command -v npm
-      - msg: "npm not found, please install it"
+        msg: "npm not found, please install it"
 
   deploy:
     desc: Deploy the project
@@ -89,9 +89,9 @@ tasks:
     deps:
       - build
       - test
-    precondition:
+    preconditions:
       - sh: command -v npm
-      - msg: "npm not found, please install it"
+        msg: "npm not found, please install it"
 {{< /code >}}
 
 {{% /section %}}

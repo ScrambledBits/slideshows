@@ -8,10 +8,21 @@ layout: "list"
 
 ## What is OrbStack?
 
-OrbStack is a tool that helps developers and DevOps engineers manage their applications and services. It's like a remote control for your applications!
+**OrbStack** is a fast, lightweight Docker engine and Linux machine runner specifically designed for macOS.
 
-{{< img src="https://orbstack.dev/_next/image?url=%2Fimg%2Fhero.png&w=1200&q=75" height="500" >}}
+### Key Positioning
+- **Drop-in replacement** for Docker Desktop
+- **macOS-native** Swift application
+- **Performance leader**: 2-5× faster file I/O
+- **Resource efficient**: <0.1% background CPU usage
+- **Quick startup**: 2 seconds from launch
+
+### Core Capabilities
+- **Docker containers** with full compatibility
+- **Linux machines** for development environments  
+- **VirtioFS file sharing** for near-native performance
+- **Rosetta integration** on Apple Silicon
 
 {{% note %}}
-So, what's OrbStack? Well, it's a very useful tool that's all about making your life easier when you're working with Docker containers and Linux machines on macOS. It's fast, it's light, and it's simple. It's a great alternative to other tools like Docker Desktop and Windows Subsystem for Linux.
+OrbStack is fundamentally different from generic container tools. It's a macOS-native application built with Swift that serves as a direct Docker Desktop replacement. The key differentiator is performance - OrbStack achieves 2-5× faster file I/O through VirtioFS and uses minimal system resources. It starts in just 2 seconds and maintains less than 0.1% background CPU usage. OrbStack handles both Docker containers and full Linux machines, making it perfect for developers who need both capabilities.
 {{% /note %}}

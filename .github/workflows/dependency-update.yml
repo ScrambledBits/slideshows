@@ -1,0 +1,105 @@
+# Automated dependency updates
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-hugo-modules:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+          cache: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.148.2"
+          extended: true
+
+      - name: Update Hugo modules
+        run: |
+          hugo mod get -u
+          hugo mod tidy
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet go.mod go.sum; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update Hugo modules"
+          title: "chore: update Hugo modules"
+          body: |
+            This PR updates Hugo modules to their latest versions.
+            
+            ## Changes
+            - Updated Hugo modules via `hugo mod get -u`
+            - Cleaned up unused dependencies via `hugo mod tidy`
+            
+            ## Testing
+            - [ ] Verify site builds successfully
+            - [ ] Check all slideshows render correctly
+            - [ ] Confirm no broken links or missing assets
+            
+            🤖 This PR was created automatically by GitHub Actions.
+          branch: chore/update-hugo-modules
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+
+  update-github-actions:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update GitHub Actions
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: '.github/workflows/*.yml'
+          propertyPath: 'jobs.*.steps[*].uses'
+          value: |
+            actions/checkout@v4
+            actions/setup-go@v5
+            actions/cache@v4
+            peaceiris/actions-hugo@v3
+            actions/configure-pages@v5
+            actions/upload-pages-artifact@v3
+            actions/deploy-pages@v4
+          updateFile: true
+          createPR: true
+          branch: chore/update-github-actions
+          targetBranch: main
+          title: "chore: update GitHub Actions to latest versions"
+          description: |
+            This PR updates GitHub Actions to their latest stable versions.
+            
+            🤖 This PR was created automatically by GitHub Actions.

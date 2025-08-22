@@ -1,7 +1,5 @@
----
 # Consolidated PR validation workflow - combines essential checks
 name: PR Checks
-
 on:
   pull_request:
     branches: ["main"]
@@ -9,21 +7,17 @@ on:
       - "README.md"
       - "docs/**"
       - ".gitignore"
-
 # Minimal permissions for PR validation
 permissions:
   contents: read
   pull-requests: write
-
 concurrency:
   group: pr-checks-${{ github.event.pull_request.number }}
   cancel-in-progress: true
-
 env:
   HUGO_VERSION: 0.148.2
   HUGO_CACHEDIR: /tmp/hugo_cache
   GO_VERSION: "1.23"
-
 jobs:
   validate:
     runs-on: ubuntu-24.04
@@ -33,19 +27,16 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: true
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-
       - name: Cache Hugo modules
         uses: actions/cache@v4
         with:
@@ -56,16 +47,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugo-${{ env.HUGO_VERSION }}-
             ${{ runner.os }}-hugo-
-
       - name: Install Node.js dependencies
         if: hashFiles('package-lock.json') != ''
         run: npm ci
-
       - name: Validate Hugo modules
         run: |
           hugo mod verify
           hugo mod graph
-
       - name: Test Hugo build
         run: |
           hugo --gc --minify --logLevel info --printPathWarnings 2>&1 | \
@@ -81,7 +69,6 @@ jobs:
           if grep -q "WARN" build.log; then
             echo "::warning::Hugo build contains warnings"
           fi
-
       - name: Test with drafts
         run: |
           hugo --gc --minify --buildDrafts --logLevel info 2>&1 | \
@@ -90,7 +77,6 @@ jobs:
           if grep -q "ERROR" build-drafts.log; then
             echo "::warning::Draft build contains errors"
           fi
-
       - name: Validate content structure
         run: |
           # Check that all slideshow directories have _index.md
@@ -101,7 +87,6 @@ jobs:
               exit 1
             fi
           done
-
       - name: Check image references
         run: |
           # Find broken image references in markdown files
@@ -114,7 +99,6 @@ jobs:
               echo "::warning::Potentially broken image reference in $file: $image_path"
             fi
           done
-
       - name: Install linting tools
         run: |
           # Install yamllint and actionlint
@@ -122,13 +106,11 @@ jobs:
           curl -sSL \
             https://github.com/rhymond/actionlint/releases/latest/download/actionlint_1.7.7_linux_amd64.tar.gz | \
             sudo tar xz -C /usr/local/bin actionlint
-
       - name: Lint YAML files
         run: |
           # Lint YAML configuration files
           find . -name "*.yml" -o -name "*.yaml" | \
             grep -E "\.(github|config)" | xargs yamllint -d relaxed
-
       - name: Lint GitHub Actions workflows
         run: |
           # Lint GitHub Actions workflow files

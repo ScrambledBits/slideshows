@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(yamllint:*)",
-      "Bash(actionlint:*)"
+      "Bash(actionlint:*)",
+      "Bash(yamlfmt:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

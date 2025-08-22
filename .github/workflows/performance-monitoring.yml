@@ -1,3 +1,4 @@
+---
 # Performance monitoring and optimization
 name: Performance Monitoring
 
@@ -22,7 +23,7 @@ env:
 
 jobs:
   build-performance:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,7 +34,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.21"
+          go-version: "1.23"
           cache: true
 
       - name: Setup Hugo
@@ -58,29 +59,29 @@ jobs:
           echo "## Build Performance Report" > performance-report.md
           echo "| Metric | Value |" >> performance-report.md
           echo "|--------|-------|" >> performance-report.md
-          
+
           # Measure build time
           start_time=$(date +%s)
           hugo --gc --minify --logLevel info --printMemoryUsage --printPathWarnings --verbose 2>&1 | tee build-output.log
           end_time=$(date +%s)
           build_duration=$((end_time - start_time))
-          
+
           echo "| Build Duration | ${build_duration}s |" >> performance-report.md
-          
+
           # Extract memory usage if available
           if grep -q "Total in" build-output.log; then
             memory_info=$(grep "Total in" build-output.log | tail -1)
             echo "| Memory Usage | ${memory_info} |" >> performance-report.md
           fi
-          
+
           # Count pages generated
           page_count=$(find public -name "*.html" | wc -l)
           echo "| Pages Generated | ${page_count} |" >> performance-report.md
-          
+
           # Measure site size
           site_size=$(du -sh public | cut -f1)
           echo "| Site Size | ${site_size} |" >> performance-report.md
-          
+
           # Check for warnings
           warning_count=$(grep -c "WARN" build-output.log || echo "0")
           echo "| Build Warnings | ${warning_count} |" >> performance-report.md
@@ -91,7 +92,7 @@ jobs:
           echo "## Asset Analysis" >> performance-report.md
           echo "| File Type | Count | Total Size |" >> performance-report.md
           echo "|-----------|-------|------------|" >> performance-report.md
-          
+
           # Analyze different file types
           for ext in html css js png jpg jpeg svg; do
             count=$(find public -name "*.${ext}" | wc -l)
@@ -107,7 +108,7 @@ jobs:
           echo "## Large Files (>100KB)" >> performance-report.md
           echo "| File | Size |" >> performance-report.md
           echo "|------|------|" >> performance-report.md
-          
+
           find public -type f -size +100k -exec du -h {} \; | sort -hr | head -10 | while read size file; do
             echo "| ${file#public/} | ${size} |" >> performance-report.md
           done
@@ -119,7 +120,7 @@ jobs:
           script: |
             const fs = require('fs');
             const report = fs.readFileSync('performance-report.md', 'utf8');
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

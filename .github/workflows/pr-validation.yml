@@ -1,3 +1,4 @@
+---
 # Pull Request validation workflow
 name: PR Validation
 
@@ -21,11 +22,11 @@ concurrency:
 env:
   HUGO_VERSION: 0.148.2
   HUGO_CACHEDIR: /tmp/hugo_cache
-  GO_VERSION: "1.21"
+  GO_VERSION: "1.23"
 
 jobs:
   validate:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

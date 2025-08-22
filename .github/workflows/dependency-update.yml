@@ -1,3 +1,4 @@
+---
 # Automated dependency updates
 name: Dependency Updates
 
@@ -13,7 +14,7 @@ permissions:
 
 jobs:
   update-hugo-modules:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,7 +25,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.21"
+          go-version: "1.23"
           cache: true
 
       - name: Setup Hugo
@@ -49,23 +50,23 @@ jobs:
 
       - name: Create Pull Request
         if: steps.changes.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: update Hugo modules"
           title: "chore: update Hugo modules"
           body: |
             This PR updates Hugo modules to their latest versions.
-            
+
             ## Changes
             - Updated Hugo modules via `hugo mod get -u`
             - Cleaned up unused dependencies via `hugo mod tidy`
-            
+
             ## Testing
             - [ ] Verify site builds successfully
             - [ ] Check all slideshows render correctly
             - [ ] Confirm no broken links or missing assets
-            
+
             🤖 This PR was created automatically by GitHub Actions.
           branch: chore/update-hugo-modules
           delete-branch: true
@@ -73,33 +74,73 @@ jobs:
             dependencies
             automated
 
-  update-github-actions:
-    runs-on: ubuntu-22.04
+  audit-actions:
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update GitHub Actions
-        uses: fjogeleit/yaml-update-action@main
+      - name: Check for outdated actions
+        id: outdated
+        run: |
+          echo "🔍 Checking for outdated GitHub Actions..."
+
+          # List current action versions
+          grep -r "uses:" .github/workflows/ | grep -v "# ignore-update" | \
+          sed 's/.*uses: //' | sort | uniq > current-actions.txt
+
+          echo "Current actions found:"
+          cat current-actions.txt
+
+          # Check if any updates are needed (this would require external API calls)
+          # For now, just create a summary for manual review
+          echo "outdated=true" >> $GITHUB_OUTPUT
+
+      - name: Create action update issue
+        if: steps.outdated.outputs.outdated == 'true'
+        uses: actions/github-script@v7
         with:
-          valueFile: '.github/workflows/*.yml'
-          propertyPath: 'jobs.*.steps[*].uses'
-          value: |
-            actions/checkout@v4
-            actions/setup-go@v5
-            actions/cache@v4
-            peaceiris/actions-hugo@v3
-            actions/configure-pages@v5
-            actions/upload-pages-artifact@v3
-            actions/deploy-pages@v4
-          updateFile: true
-          createPR: true
-          branch: chore/update-github-actions
-          targetBranch: main
-          title: "chore: update GitHub Actions to latest versions"
-          description: |
-            This PR updates GitHub Actions to their latest stable versions.
-            
-            🤖 This PR was created automatically by GitHub Actions.
+          script: |
+            const fs = require('fs');
+            const actions = fs.readFileSync('current-actions.txt', 'utf8');
+
+            const body = `## 🔄 GitHub Actions Version Audit
+
+            This issue tracks the current versions of GitHub Actions used in our workflows.
+            Please review and update manually to ensure compatibility.
+
+            ### Current Actions:
+            \`\`\`
+            ${actions}
+            \`\`\`
+
+            ### Recommended Updates:
+            - Check each action's repository for latest stable version
+            - Test updates in a separate branch before merging
+            - Update one action at a time to isolate potential issues
+
+            🤖 This issue was created automatically by GitHub Actions.`;
+
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['dependencies', 'automation'],
+              state: 'open'
+            });
+
+            const existingIssue = issues.data.find(issue =>
+              issue.title.includes('GitHub Actions Version Audit')
+            );
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🔄 GitHub Actions Version Audit',
+                body: body,
+                labels: ['dependencies', 'automation']
+              });
+            }

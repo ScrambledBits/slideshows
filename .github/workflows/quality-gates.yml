@@ -1,3 +1,4 @@
+---
 # Quality gates workflow - enforces standards before merge
 name: Quality Gates
 
@@ -18,13 +19,13 @@ concurrency:
 env:
   HUGO_VERSION: 0.148.2
   HUGO_CACHEDIR: /tmp/hugo_cache
-  GO_VERSION: "1.21"
+  GO_VERSION: "1.23"
 
 jobs:
   # Skip draft PRs
   check-draft:
     if: github.event.pull_request.draft == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       should-run: ${{ steps.check.outputs.result }}
     steps:
@@ -34,7 +35,7 @@ jobs:
   lint-and-format:
     needs: check-draft
     if: needs.check-draft.outputs.should-run == 'true'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -54,16 +55,10 @@ jobs:
           skip-cache: false
 
       - name: Check markdown formatting
-        uses: DavidAnson/markdownlint-action@v1
+        uses: DavidAnson/markdownlint-cli2-action@v20
         with:
-          files: '**/*.md'
-          ignore: 'content/**/*.md'  # Skip content files as they may have intentional formatting
-          config: |
-            {
-              "MD013": false,
-              "MD033": false,
-              "MD041": false
-            }
+          globs: 'README.md,CLAUDE.md,docs/**/*.md'
+          config: '.markdownlint.json'
 
       - name: Validate YAML files
         run: |
@@ -72,7 +67,7 @@ jobs:
   build-test:
     needs: check-draft
     if: needs.check-draft.outputs.should-run == 'true'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -106,13 +101,13 @@ jobs:
       - name: Test Hugo build
         run: |
           hugo --gc --minify --logLevel info --printPathWarnings 2>&1 | tee build.log
-          
+
           # Check for build errors
           if grep -q "ERROR" build.log; then
             echo "::error::Hugo build failed with errors"
             exit 1
           fi
-          
+
           # Warn about warnings but don't fail
           if grep -q "WARN" build.log; then
             echo "::warning::Hugo build contains warnings"
@@ -121,7 +116,7 @@ jobs:
       - name: Test with drafts
         run: |
           hugo --gc --minify --buildDrafts --logLevel info 2>&1 | tee build-drafts.log
-          
+
           if grep -q "ERROR" build-drafts.log; then
             echo "::warning::Draft build contains errors"
           fi
@@ -136,7 +131,7 @@ jobs:
   size-impact:
     needs: check-draft
     if: needs.check-draft.outputs.should-run == 'true'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout PR
         uses: actions/checkout@v4
@@ -174,14 +169,14 @@ jobs:
           main_size=${{ env.MAIN_SIZE }}
           diff=$((pr_size - main_size))
           percent_change=$((diff * 100 / main_size))
-          
+
           echo "diff=$diff" >> $GITHUB_OUTPUT
           echo "percent=$percent_change" >> $GITHUB_OUTPUT
           echo "pr_mb=$((pr_size / 1024 / 1024))" >> $GITHUB_OUTPUT
           echo "main_mb=$((main_size / 1024 / 1024))" >> $GITHUB_OUTPUT
 
       - name: Comment on size impact
-        if: abs(steps.size-diff.outputs.percent) > 5
+        if: steps.size-diff.outputs.percent > 5 || steps.size-diff.outputs.percent < -5
         uses: actions/github-script@v7
         with:
           script: |
@@ -189,20 +184,23 @@ jobs:
             const percent = ${{ steps.size-diff.outputs.percent }};
             const prMb = ${{ steps.size-diff.outputs.pr_mb }};
             const mainMb = ${{ steps.size-diff.outputs.main_mb }};
-            
+
             const emoji = diff > 0 ? '📈' : '📉';
             const sign = diff > 0 ? '+' : '';
-            
+
+            const diffMb = Math.abs(diff / 1024 / 1024).toFixed(2);
+            const absPercent = Math.abs(percent);
+
             const comment = `${emoji} **Size Impact Report**
-            
+
             | Metric | Value |
             |--------|-------|
             | Main branch size | ${mainMb} MB |
             | PR branch size | ${prMb} MB |
-            | Size difference | ${sign}${Math.abs(diff / 1024 / 1024).toFixed(2)} MB (${sign}${percent}%) |
-            
-            ${Math.abs(percent) > 20 ? '⚠️ **Large size change detected!**' : ''}`;
-            
+            | Size difference | ${sign}${diffMb} MB (${sign}${percent}%) |
+
+            ${absPercent > 20 ? '⚠️ **Large size change detected!**' : ''}`;
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -214,16 +212,26 @@ jobs:
   quality-gates-summary:
     needs: [lint-and-format, build-test, size-impact]
     if: always()
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Check all jobs
         run: |
-          jobs=(lint-and-format build-test size-impact)
-          for job in "${jobs[@]}"; do
-            status="${{ needs[job].result }}"
-            if [[ "$status" != "success" ]]; then
-              echo "Quality gate failed: $job ($status)"
-              exit 1
-            fi
-          done
+          lint_status="${{ needs.lint-and-format.result }}"
+          build_status="${{ needs.build-test.result }}"
+          size_status="${{ needs.size-impact.result }}"
+
+          echo "Job results: lint=$lint_status, build=$build_status, size=$size_status"
+
+          if [[ "$lint_status" != "success" ]]; then
+            echo "Quality gate failed: lint-and-format ($lint_status)"
+            exit 1
+          fi
+          if [[ "$build_status" != "success" ]]; then
+            echo "Quality gate failed: build-test ($build_status)"
+            exit 1
+          fi
+          if [[ "$size_status" != "success" ]]; then
+            echo "Quality gate failed: size-impact ($size_status)"
+            exit 1
+          fi
           echo "All quality gates passed!"

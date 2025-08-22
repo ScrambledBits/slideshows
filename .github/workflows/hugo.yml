@@ -1,3 +1,4 @@
+---
 # Modern Hugo site deployment to GitHub Pages with latest best practices
 name: Deploy Hugo site to Pages
 
@@ -32,12 +33,12 @@ defaults:
 env:
   HUGO_VERSION: 0.148.2
   HUGO_CACHEDIR: /tmp/hugo_cache
-  GO_VERSION: "1.21"
+  GO_VERSION: "1.23"
 
 jobs:
   # Build job
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,7 +90,9 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
-            --logLevel info
+            --logLevel info \
+            --enableGitInfo \
+            --cleanDestinationDir
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -101,9 +104,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

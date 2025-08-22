@@ -1,6 +1,2 @@
-github.com/dzello/reveal-hugo v0.0.0-20230207174941-0c2501528afc h1:2GvyfTZBRD/9lySZ+1Bf/4UuWJ24pjOf92comnCNtA0=
-github.com/dzello/reveal-hugo v0.0.0-20230207174941-0c2501528afc/go.mod h1:9mgTYgEkMfnc36vaNSvk3xRedXIv2qXjejlugfwyb3o=
-github.com/dzello/reveal-hugo v0.0.0-20230226080734-ba781cae5b54 h1:OiHgy3inaBU4LFE5alXgmEkEOkkf9O331XVIabt9eT4=
-github.com/dzello/reveal-hugo v0.0.0-20230226080734-ba781cae5b54/go.mod h1:9mgTYgEkMfnc36vaNSvk3xRedXIv2qXjejlugfwyb3o=
-github.com/dzello/reveal-hugo v0.0.0-20230621074321-b5fd252eab49 h1:cp7gJZFaCfhehEGAWnElHVrypf34oQVEOjjjcRtHTD4=
-github.com/dzello/reveal-hugo v0.0.0-20230621074321-b5fd252eab49/go.mod h1:9mgTYgEkMfnc36vaNSvk3xRedXIv2qXjejlugfwyb3o=
+github.com/joshed-io/reveal-hugo v0.0.0-20241030080325-e191f51d09be h1:v+kEI6Q/q2eGUkUq+ITGsWZ8rpfPvgjYepoQlkDq9b8=
+github.com/joshed-io/reveal-hugo v0.0.0-20241030080325-e191f51d09be/go.mod h1:aXqv6sUwk2OVl71kJjJAYl4mWhGNThGp1kJR9+VgPM4=

@@ -2,7 +2,7 @@ baseURL = 'https://scrambledbits.github.io/slideshows/'
 languageCode = 'en-us'
 title = 'ScrambledBits | Presentations'
 
-theme = ["github.com/dzello/reveal-hugo"]
+theme = ["github.com/joshed-io/reveal-hugo"]
 
 [markup.highlight]
 codeFences = false

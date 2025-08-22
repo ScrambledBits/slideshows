@@ -81,7 +81,7 @@ jobs:
         run: |
           # Check that all slideshow directories have _index.md
           find content -maxdepth 2 -type d -not -name content \
-            -not -name _index.md | while read -r dir; do
+            -not -name test -not -name _index.md | while read -r dir; do
             if [ ! -f "$dir/_index.md" ]; then
               echo "::error::Missing _index.md in $dir"
               exit 1
